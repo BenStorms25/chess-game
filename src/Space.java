@@ -2,31 +2,29 @@ public class Space {
 
     private Color color;
     private boolean isOccupied;
-    private Piece occupiedBy;
-
+    private Piece piece;
     private String label;
-
     private String file;
     private String rank;
 
     public Space(Color color, boolean isOccupied, Piece occupiedBy, String label){
         this.color = color;
         this.isOccupied = isOccupied;
-        this.occupiedBy = occupiedBy;
+        this.piece = occupiedBy;
         this.label = label;
     }
 
     public Space(Color color, String label){
         this.color = color;
         this.isOccupied = false;
-        this.occupiedBy = null;
+        this.piece = null;
         this.label = label;
     }
 
     public Space(){
         this.color = Color.WHITE;
         this.isOccupied = false;
-        this.occupiedBy = null;
+        this.piece = null;
         this.file = "";
         this.rank = "";
         this.label = "";
@@ -45,12 +43,18 @@ public class Space {
         setLabel();
     }
 
+    public void setPiece(Piece piece){
+        this.piece = piece;
+        this.isOccupied = true;
+
+    }
+
     private void setLabel(){
         this.label = this.file.concat(this.rank);
     }
 
     public Piece getPiece(){
-        return occupiedBy;
+        return piece;
     }
     public boolean isOccupied(){
         return isOccupied;
