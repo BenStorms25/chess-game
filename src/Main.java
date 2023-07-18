@@ -5,5 +5,6 @@ public class Main {
         GameManager manager = new GameManager();
         manager.initializeBoard();
         manager.displayBoard();
+        manager.newGame();
     }
 }

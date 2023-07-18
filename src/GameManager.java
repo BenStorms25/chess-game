@@ -13,7 +13,9 @@ public class GameManager {
     }
 
     public void newGame(){
-        // will start input output process for handling game
+        IOHandler handler = new IOHandler();
+        handler.displayOpeningMessage();
+        handler.beginIOStream();
     }
 
     public void initializeBoard(){
