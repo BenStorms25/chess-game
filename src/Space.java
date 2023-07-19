@@ -46,7 +46,6 @@ public class Space {
     public void setPiece(Piece piece){
         this.piece = piece;
         this.isOccupied = true;
-
     }
 
     private void setLabel(){

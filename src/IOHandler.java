@@ -5,11 +5,10 @@ import java.util.List;
 
 public class IOHandler {
 
-    String lastMove;
+    // the game manager is going to be the listener here
+    private GameManager listener;
 
-    public IOHandler(){
-        lastMove = "";
-    }
+    public IOHandler(){}
 
     public void displayOpeningMessage(){
         // will start input output process for handling game
@@ -24,6 +23,12 @@ public class IOHandler {
     }
 
     private boolean isValidMove(String move){
+        // will eventually need to code for disambiguity between
+        // two of the same piece that can move to the same spot.
+
+
+
+
         // verify pgn validity
         List<Character> pieces = new ArrayList<>(Arrays.asList('N', 'Q', 'K', 'R', 'B'));
         List<Character> files =
@@ -60,6 +65,8 @@ public class IOHandler {
         return true;
     }
 
+
+
     public void beginIOStream(){
         // will need to add randomly generated color for user
         String input;
@@ -69,8 +76,8 @@ public class IOHandler {
             System.out.print("Enter move: ");
             input = scanner.nextLine();
             if(isValidMove(input)){
-                lastMove = input;
-                System.out.println("input was valid.  Move: " + input);
+                // send input to game manager
+                handleInput(input);
             }
             else {
                 System.out.println("input was not valid: " + input);
@@ -88,4 +95,15 @@ public class IOHandler {
             return false;
         }
     }
+
+    private void handleInput(String input) {
+        if (listener != null) {
+            listener.onInputReceived(input);
+        }
+    }
+
+    public void setInputListener(GameManager manager) {
+        this.listener = manager;
+    }
+
 }
