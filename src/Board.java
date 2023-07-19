@@ -47,8 +47,6 @@ public class Board {
 
     }
 
-
-
     private void colorAndLabelBoard(){
         // this method will assign color and label to each space on the board
 
@@ -83,6 +81,87 @@ public class Board {
         }
 
     }
+
+    public void handleMove(String move){
+        // trigger move will accept a move string and process it, moving the correct piece to the correct space.
+
+        char[] arr = move.toCharArray();
+        String space = move.substring(move.length() - 2);
+
+        if(arr.length == 2){
+            movePawn(space);
+        } else {
+            switch(arr[0]){
+                case 'N':
+                    moveKnight(space);
+                    break;
+                case 'B':
+                    moveBishop(space);
+                    break;
+                case 'Q':
+                    moveQueen(space);
+                    break;
+                case 'K':
+                    moveKing(space);
+                    break;
+                case 'R':
+                    moveRook(space);
+                    break;
+            }
+        }
+    }
+
+
+
+    private void movePawn(String space){
+        // determine legality, then move
+        System.out.println("moving pawn");
+    }
+    private void moveRook(String space){
+        System.out.println("moving rook");
+    }
+    private void moveQueen(String space){
+        System.out.println("moving queen");
+    }
+    private void moveKnight(String space){
+        System.out.println("moving knight");
+    }
+    private void moveBishop(String space){
+        System.out.println("moving bishop");
+    }
+    private void moveKing(String space){
+        System.out.println("moving king");
+    }
+
+
+    private static int[] algebraicToIndices(String algebraicNotation) {
+        int[] indices = new int[2];
+
+        // Ensure the algebraic notation is in the correct format (e.g., 'a1')
+        if (algebraicNotation.length() != 2) {
+            throw new IllegalArgumentException("Invalid algebraic notation format.");
+        }
+
+        char fileChar = algebraicNotation.charAt(0);
+        char rankChar = algebraicNotation.charAt(1);
+
+        // Convert the file character to array index
+        int fileIndex = fileChar - 'a'; // 'a' corresponds to 0, 'b' corresponds to 1, and so on
+
+        // Convert the rank character to array index
+        int rankIndex = Character.getNumericValue(rankChar) - 1; // '1' corresponds to 0, '2' corresponds to 1, and so on
+
+        // Check if the indices are within the valid range (0 to 7)
+        if (fileIndex < 0 || fileIndex > 7 || rankIndex < 0 || rankIndex > 7) {
+            throw new IllegalArgumentException("Invalid algebraic notation: Out of board range.");
+        }
+
+        indices[0] = rankIndex;
+        indices[1] = fileIndex;
+
+        return indices;
+    }
+
 
     public void displayBoard(){
         System.out.println(this.board);

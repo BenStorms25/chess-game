@@ -32,9 +32,10 @@ public class GameManager implements InputListener {
     }
 
     @Override
-    public void onInputReceived(String input) {
+    public void onInputReceived(String move) {
         // where moves are received
-        System.out.println("move has been recieved: " + input);
+        // pass the move down to the board class
+        board.handleMove(move);
     }
 
 }
